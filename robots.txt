@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://haihan19955.github.io/basedrop/sitemap.xml
