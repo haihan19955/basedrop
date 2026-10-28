@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Airtable export checklist: records, schema, attachments, views, automations | BaseDrop</title>
+<meta name="description" content="Leaving Airtable or archiving a base? The five pieces of a complete export — records, schema, attachments, views and automations — native options, gaps and tools for each.">
+<link rel="canonical" href="https://haihan19955.github.io/basedrop/airtable-export-checklist.html">
+<meta property="og:title" content="Airtable export checklist: records, schema, attachments, views, automations | BaseDrop">
+<meta property="og:description" content="Leaving Airtable or archiving a base? The five pieces of a complete export — records, schema, attachments, views and automations — native options, gaps and tools for each.">
+<meta property="og:url" content="https://haihan19955.github.io/basedrop/airtable-export-checklist.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://haihan19955.github.io/basedrop/og.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The complete Airtable export checklist: records, schema, attachments, views, automations", "description": "The five pieces of a complete Airtable export — what Airtable exports natively, what it cannot, and where tools fill the gaps.", "datePublished": "2026-10-28", "author": {"@type": "Organization", "name": "BaseDrop"}, "publisher": {"@type": "Organization", "name": "BaseDrop"}, "mainEntityOfPage": "https://haihan19955.github.io/basedrop/airtable-export-checklist.html"}</script>
+</head><body><div class="wrap"><nav><a class="brand" href="index.html"><img src="logo.svg" alt="">BaseDrop</a><span class="sp"></span><a href="install.html">Install</a><a href="guides.html">Guides</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a></nav>
+<main><article>
+<h1>The complete Airtable export checklist: records, schema, attachments, views, automations</h1>
+<p class="lead">Most "exports" of an Airtable base are a few CSV downloads — and most people who later try to rebuild the base discover what a CSV leaves behind: attachments reduced to links that expire within hours, views and automations gone entirely. Whether you are migrating to another tool, archiving a finished project or building an exit plan, a complete export has five pieces. Here is each one, the native way to get it, the gap to watch, and where a tool helps.</p>
+<table>
+<tr><th>Piece</th><th>Native export?</th><th>Complete on its own?</th></tr>
+<tr><td>Records</td><td>CSV per view; full data via API</td><td>Mostly — mind hidden fields and record IDs</td></tr>
+<tr><td>Schema</td><td>API "Get base schema"; otherwise manual</td><td>Structure yes; behavior no</td></tr>
+<tr><td>Attachments</td><td>No — CSV contains only expiring URLs</td><td>No. The files must be downloaded</td></tr>
+<tr><td>Views</td><td>Names and types via API schema only</td><td>No. Filters and sorts are not exported</td></tr>
+<tr><td>Automations</td><td>None</td><td>No. Documentation is the only export</td></tr>
+</table>
+<h2>1. Records</h2>
+<p><strong>Native way:</strong> download a CSV from each view, or pull every field through the API. <strong>The gap:</strong> a CSV contains exactly what the view shows — hide a field and it silently drops out of your export — and it carries no record IDs, which are the only reliable way to reconnect linked records after a move. Export from a view with every field visible, or use the API and keep the IDs. One table with several views still needs only one full export; do not archive five partial CSVs of the same data.</p>
+<h2>2. Schema</h2>
+<p><strong>Native way:</strong> the API's "Get base schema" endpoint returns tables, fields (with types and options) and views as JSON; without API access, document the schema by hand. <strong>The gap:</strong> the schema describes structure, not behavior — it will not tell a future you <em>why</em> a formula exists or what a rollup feeds. Add one line of intent per non-obvious field while the knowledge is still in the building. This is also the piece most backups skip entirely; the <a href="guide-airtable-backup-with-attachments.html">backup guide</a> covers why that hurts at restore time.</p>
+<h2>3. Attachments</h2>
+<p><strong>Native way:</strong> there isn't one for the files themselves. The URLs in a CSV or API response expire within hours, so an "export" that only saves the spreadsheet is a countdown, not an archive. <strong>The gap:</strong> the actual files must be downloaded while the links are fresh, ideally with names and folders that mean something outside Airtable. A script or a bulk downloader does this in one run per table; organizing the tree is covered in the <a href="guide-export-airtable-attachments-to-folders.html">folders guide</a>.</p>
+<h2>4. Views</h2>
+<p><strong>Native way:</strong> the API schema lists view names and types, and that is where native export stops. <strong>The gap:</strong> filter conditions, sorts, groupings and hidden-field choices are not exposed for export by any route we know of — no tool can faithfully recreate your views in another system. The practical move is documentation: for each view that matters, record its filter, sort and grouping in a note or screenshot next to the export. It takes minutes per view and is the difference between rebuilding in an afternoon and archaeology.</p>
+<h2>5. Automations</h2>
+<p><strong>Native way:</strong> none. Automations cannot be exported or imported. <strong>The gap:</strong> triggers, conditions and actions live only inside the base. Document each automation — trigger, condition, what it changes or sends — and screenshot the configuration. If you are migrating, expect to rebuild them natively in the destination or in a tool like Make or n8n; the document you write here is the specification for that rebuild. Interfaces and extensions deserve the same treatment: a screenshot and a paragraph beat a surprise later.</p>
+<h2>Putting it together: a realistic export run</h2>
+<p>In order: (1) snapshot the schema via the API and save it with the export; (2) export records per table with IDs; (3) download the attachment files themselves, renamed and foldered; (4) walk the views and automations and write the one-page document for each; (5) spot-check the result by opening files from a different machine and confirming the counts match. Expect the attachments step to be the long one — everything else is minutes.</p>
+<p><strong>Where BaseDrop fits, honestly:</strong> its Pro full-backup mode covers pieces 1–3 for a base — records as CSV and JSON, the schema, and the attachment files with an index and manifest — in a single run. It does not, and cannot, export view configurations or automations (pieces 4–5); those two are documentation work no downloader can do for you. Any tool that claims a complete one-click export of a base without mentioning that caveat is overselling.</p>
+<div class="card cta"><p><strong>Get BaseDrop</strong><br>Bulk-download Airtable attachments as organized ZIPs — free for up to 50 files per export, right in your browser.</p><p><a class="btn" href="https://chromewebstore.google.com/detail/liclodjlieehpngadfgfnohoejecojnp">Add to Chrome — it's free</a> <a href="https://payhip.com/b/qokFH">Pro: one-time $19 on Payhip</a></p></div>
+</article></main>
+<footer>© 2026 BaseDrop · Not affiliated with Airtable, Inc. Airtable is a trademark of Airtable, Inc. · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="support.html">Support</a></footer></div></body></html>
